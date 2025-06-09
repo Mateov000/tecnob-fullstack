@@ -65,9 +65,10 @@ function displayMessage(padre, tipo, mensaje){
         let btn_cerrar = document.createElement('button');
         btn_cerrar.classList.add('w3-button', 'w3-small', 'w3-display-topright');
         btn_cerrar.textContent = '×';
-        btn_cerrar.addEventListener('click', (event) =>
+        btn_cerrar.addEventListener('click', (e) =>
         {
-           event.currentTarget.parentNode.style.display = 'none';
+            e.preventDefault();
+            e.currentTarget.parentNode.style.display = 'none';
         }
         );
         let mensajeCartel = document.createElement('span');
