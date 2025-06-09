@@ -38,8 +38,16 @@ function handlePost($conn)
     } 
     else 
     {
-        http_response_code(500);
-        echo json_encode(["error" => "No se pudo crear"]);
+        if($result['errorCode'] == 1062)
+        {
+            http_response_code(409);
+            echo json_encode(["error" => "La materia ya existe"]);
+        }
+        else
+        {
+            http_response_code(500);
+            echo json_encode(["error" => "No se pudo crear"]);
+        }
     }
 }
 

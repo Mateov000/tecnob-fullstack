@@ -42,13 +42,52 @@ function setupSubjectFormHandler()
             
             form.reset();
             document.getElementById('subjectId').value = '';
+            displayMessage(form, 'success', "Materia añadida con éxito");
             loadSubjects();
         }
         catch (err)
         {
-            console.error(err.message);
+            if(err.message = "La materia ya existe"){
+                displayMessage(form, 'error', "No se pudo añadir la materia puesto que ya existe una con el mismo nombre");
+            }
+            console.error(err);
         }
   });
+}
+
+function displayMessage(padre, tipo, mensaje){
+    let cartel = document.getElementById('cartel');
+
+    if (!cartel){
+        cartel = document.createElement('div');
+        cartel.classList.add('w3-panel', 'w3-display-container');
+        cartel.id = 'cartel';
+        let btn_cerrar = document.createElement('button');
+        btn_cerrar.classList.add('w3-button', 'w3-small', 'w3-display-topright');
+        btn_cerrar.textContent = '×';
+        btn_cerrar.addEventListener('click', (event) =>
+        {
+           event.currentTarget.parentNode.style.display = 'none';
+        }
+        );
+        let mensajeCartel = document.createElement('span');
+        mensajeCartel.id = 'mensaje-cartel';
+
+        cartel.appendChild(btn_cerrar);
+        cartel.appendChild(mensajeCartel);
+        padre.appendChild(cartel);
+    }
+    cartel.style.display = 'block';
+    document.getElementById('mensaje-cartel').textContent = mensaje;
+    if(tipo == "error"){
+        cartel.classList.add('w3-red');
+        cartel.classList.remove('w3-green');
+
+
+    }else{
+        cartel.classList.add('w3-green');
+        cartel.classList.remove('w3-red');
+    }
 }
 
 function setupCancelHandler()

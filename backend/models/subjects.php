@@ -29,7 +29,8 @@ function getSubjectById($conn, $id)
 
 function createSubject($conn, $name) 
 {
-    $sql = "INSERT INTO subjects (name) VALUES (?)";
+    try{
+        $sql = "INSERT INTO subjects (name) VALUES (?)";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $name);
     $stmt->execute();
@@ -39,6 +40,12 @@ function createSubject($conn, $name)
         'inserted' => $stmt->affected_rows,        
         'id' => $conn->insert_id
     ];
+    }catch (mysqli_sql_exception $e){
+        return[
+            'inserted' => 0,
+            'errorCode' => $e->getCode()
+        ];
+    }
 }
 
 function updateSubject($conn, $id, $name) 

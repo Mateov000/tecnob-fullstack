@@ -3,6 +3,16 @@ body {
     font-family: Arial, sans-serif;
     padding: 20px;
 }
+
+#cartel button{
+    padding: 2px 5px;
+    display:inline-block;
+    margin: 0;  
+    top: 0;
+    right: 0;
+}
+
+
 form input, form button {
     display: block;
     margin: 10px 0;
