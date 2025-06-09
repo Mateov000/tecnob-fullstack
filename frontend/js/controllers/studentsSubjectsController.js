@@ -76,7 +76,14 @@ function setupFormHandler()
         } 
         catch (err) 
         {
-            console.error('Error guardando relación:', err.message);
+            if(err.message == "La relacion ya existe"){
+                alert("El alumno ya recibió una calificación para esa materia");
+            }
+            else
+            {
+                console.error('Error guardando relación:', err.message);
+        
+            }
         }
     });
 }

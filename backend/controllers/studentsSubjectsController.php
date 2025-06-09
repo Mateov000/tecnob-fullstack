@@ -28,8 +28,14 @@ function handlePost($conn)
     } 
     else 
     {
-        http_response_code(500);
-        echo json_encode(["error" => "Error al asignar"]);
+        if($result['errorCode'] == 1062){
+            http_response_code(409);
+            echo json_encode(["error" => "La relacion ya existe"]);
+        }
+        else{
+            http_response_code(500);
+            echo json_encode(["error" => "Error al asignar"]);
+        }
     }
 }
 

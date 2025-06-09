@@ -11,16 +11,23 @@
 
 function assignSubjectToStudent($conn, $student_id, $subject_id, $approved) 
 {
-    $sql = "INSERT INTO students_subjects (student_id, subject_id, approved) VALUES (?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("iii", $student_id, $subject_id, $approved);
-    $stmt->execute();
-
-    return 
-    [
-        'inserted' => $stmt->affected_rows,        
-        'id' => $conn->insert_id
-    ];
+    try{
+        $sql = "INSERT INTO students_subjects (student_id, subject_id, approved) VALUES (?, ?, ?)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("iii", $student_id, $subject_id, $approved);
+        $stmt->execute();
+        return 
+        [
+            'inserted' => $stmt->affected_rows,        
+            'id' => $conn->insert_id
+        ];
+    }catch(mysqli_sql_exception $e){
+        return 
+        [
+            'inserted' => 0,        
+            'errorCode' => $e->getCode()
+        ];
+    }
 }
 
 //Query escrita sin ALIAS resumidos (a mi me gusta más):

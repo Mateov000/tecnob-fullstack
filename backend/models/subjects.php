@@ -31,15 +31,15 @@ function createSubject($conn, $name)
 {
     try{
         $sql = "INSERT INTO subjects (name) VALUES (?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $name);
-    $stmt->execute();
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $name);
+        $stmt->execute();
 
-    return 
-    [
-        'inserted' => $stmt->affected_rows,        
-        'id' => $conn->insert_id
-    ];
+        return 
+        [
+            'inserted' => $stmt->affected_rows,        
+            'id' => $conn->insert_id
+        ];
     }catch (mysqli_sql_exception $e){
         return[
             'inserted' => 0,
