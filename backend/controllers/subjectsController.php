@@ -78,8 +78,16 @@ function handleDelete($conn)
     } 
     else 
     {
-        http_response_code(500);
-        echo json_encode(["error" => "No se pudo eliminar"]);
+        if($result['errorCode'] == 1451)
+        {
+            http_response_code(409);
+            echo json_encode(["error" => "Pertenece a una relacion"]);
+        }
+        else
+        {
+            http_response_code(500);
+            echo json_encode(["error" => "No se pudo eliminar"]);
+        }
     }
 }
 ?>

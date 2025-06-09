@@ -58,8 +58,8 @@ CREATE TABLE students_subjects (
     subject_id INT NOT NULL,
     approved BOOLEAN DEFAULT FALSE,
     UNIQUE (student_id, subject_id),
-    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
-    FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE CASCADE
+    FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE NO ACTION,
+    FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE NO ACTION
 ) ENGINE=INNODB;
 
 /*Insertar relaciones de prueba students_subjects*/

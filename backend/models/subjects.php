@@ -60,11 +60,19 @@ function updateSubject($conn, $id, $name)
 
 function deleteSubject($conn, $id) 
 {
-    $sql = "DELETE FROM subjects WHERE id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
+    try{
+        $sql = "DELETE FROM subjects WHERE id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
 
-    return ['deleted' => $stmt->affected_rows];
+        return ['deleted' => $stmt->affected_rows];
+    }
+    catch(mysqli_sql_exception $e){
+        return[
+            'deleted' => 0,
+            'errorCode' => $e->getCode()
+        ];
+    }
 }
 ?>

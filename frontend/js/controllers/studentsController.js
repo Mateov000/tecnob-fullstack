@@ -146,7 +146,10 @@ async function confirmDelete(id)
     } 
     catch (err) 
     {
-        console.error('Error al borrar:', err.message);
+        if(err.message == "Pertenece a una relacion")
+            alert("No se puede eliminar el estudiante porque existen registros de su condición de aprobación de una o más materias");
+        else
+            console.error('Error al borrar:', err.message);
     }
 }
   

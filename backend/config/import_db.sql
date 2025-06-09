@@ -38,8 +38,8 @@ CREATE TABLE `students_subjects` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `student_id` (`student_id`,`subject_id`),
   KEY `subject_id` (`subject_id`),
-  CONSTRAINT `students_subjects_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `students_subjects_ibfk_2` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`) ON DELETE CASCADE
+  CONSTRAINT `students_subjects_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE NO ACTION,
+  CONSTRAINT `students_subjects_ibfk_2` FOREIGN KEY (`subject_id`) REFERENCES `subjects` (`id`) ON DELETE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 INSERT INTO `students_subjects` (`id`, `student_id`, `subject_id`, `approved`) VALUES

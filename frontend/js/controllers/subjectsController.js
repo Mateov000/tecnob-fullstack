@@ -170,6 +170,9 @@ async function confirmDeleteSubject(id)
     }
     catch (err)
     {
-        console.error('Error al borrar materia:', err.message);
+        if(err.message == "Pertenece a una relacion")
+            alert("No se puede borrar una materia si todavía existe algún alumno con una condición de aprobación sobre ella (aprobado/desaprobado)");
+        else
+            console.error('Error al borrar materia:', err.message);
     }
 }
